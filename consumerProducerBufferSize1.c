@@ -23,7 +23,6 @@ void *produce(void *args)
     {
         put(i);
     }
-    return NULL;
 }
 
 void *consume(void *args)
@@ -34,5 +33,4 @@ void *consume(void *args)
         int tmp = get();
         prinf("%d\n", tmp);
     }
-    return NULL;
 }
