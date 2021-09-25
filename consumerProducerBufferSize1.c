@@ -4,7 +4,8 @@
 
 int buffer;
 long counter = 0; //protocols starts with empty buffer
-pthread_cond_t cond;
+pthread_cond_t cond_full;
+pthread_cond_t cond_empty;
 pthread_mutex_t mutex;
 
 void put(int value)
@@ -30,10 +31,10 @@ void *produce(void *args)
         lock(mutex);
         while (counter == 1)
         {
-            wait(cond, mutex);
+            wait(cond_full, mutex);
         }
         put(i);
-        signal(cond);
+        signal(cond_empty);
         unlock(mutex);
     }
     return NULL;
@@ -47,10 +48,10 @@ void *consume(void *args)
         lock(mutex);
         while (counter == 0)
         {
-            wait(cond, mutex);
+            wait(cond_empty, mutex);
         }
         int tmp = get();
-        signal(cond);
+        signal(cond_full);
         unlock(mutex);
     }
     return NULL;
