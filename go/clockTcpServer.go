@@ -2,6 +2,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -9,7 +10,8 @@ import (
 )
 
 func main() {
-	listener, err := net.Listen("tcp", "localhost:8000")
+	count := 0
+	listener, err := net.Listen("tcp", "localhost:8001")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -19,7 +21,9 @@ func main() {
 			log.Print(err)
 			continue
 		}
-		handleConn(conn)
+		count = count + 1
+		fmt.Printf("Number of Active %d\n", count)
+		go handleConn(conn)
 	}
 }
 
