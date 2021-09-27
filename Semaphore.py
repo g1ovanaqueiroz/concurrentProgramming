@@ -1,4 +1,4 @@
-# you can pretend that's a real semaphore in python
+# you can pretend that's a real semaphore in python :p
 class Semaphore:
 
     def __init__(self, n):
