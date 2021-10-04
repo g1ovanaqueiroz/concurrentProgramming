@@ -15,12 +15,10 @@ func producer(ch chan int) {
 }
 
 func consumer(ch chan int, join_ch chan int) {
-	for {
-		x, ok := <-ch
-		if !ok {
-			join_ch <- 1
-			break
-		}
+	for x := range ch{
+		join_ch <- 1
+		break
+	}
 		if x%2 == 0 {
 			fmt.Printf("Even number (%d)\n", x)
 		}
