@@ -20,6 +20,7 @@ func consumer(ch chan int, join_ch chan int) {
 			fmt.Printf("Even number (%d)\n", x)
 		}
 	}
+	join_ch <- 1
 }
 
 func main() {
