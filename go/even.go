@@ -5,7 +5,8 @@ import (
 	"math/rand"
 )
 
-func producer(ch chan int) {
+//chan<- send only channel
+func producer(ch chan<- int) {
 	rand.Seed(42)
 	for i := 0; i < 100; i++ {
 		v := rand.Intn(10)
@@ -14,7 +15,8 @@ func producer(ch chan int) {
 	close(ch)
 }
 
-func consumer(ch chan int, join_ch chan int) {
+// receive only channel
+func consumer(ch <-chan int, join_ch chan<- int) {
 	for x := range ch {
 		if x%2 == 0 {
 			fmt.Printf("Even number (%d)\n", x)
