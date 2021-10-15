@@ -47,8 +47,9 @@ func sendAuditLog(chClient1 <-chan string, chClient2 <-chan string) {
 			sendToServer(msg)
 		case <-timerCh:
 			tries = tries + 1
-			if tries >= maxTries:
+			if tries >= maxTries {
 				fmt.Println("timeout")
+			}
 		}
 
 	}
