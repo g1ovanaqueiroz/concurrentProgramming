@@ -36,7 +36,8 @@ func sendAuditLog(chClient1 <-chan string, chClient2 <-chan string) {
 
 	//eat your own dog food
 	timerCh := time.Tick(10 * time.Second)
-	<-timerCh
+	maxTries := 5
+	tries := 0
 
 	for {
 		select {
@@ -45,7 +46,9 @@ func sendAuditLog(chClient1 <-chan string, chClient2 <-chan string) {
 		case msg := <-chClient2:
 			sendToServer(msg)
 		case <-timerCh:
-			fmt.Println("timeout")
+			tries = tries + 1
+			if tries >= maxTries:
+				fmt.Println("timeout")
 		}
 
 	}
