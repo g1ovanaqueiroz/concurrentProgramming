@@ -32,7 +32,11 @@ func main() {
 
 func sendAuditLog(chClient1 <-chan string, chClient2 <-chan string) {
 	// connect to yet another server to send audit log
-	// every tima a msg is sent back to a client
+	// every time a msg is sent back to a client
+
+	//eat your own dog food
+	timerCh := time.Tick(10 * time.Second)
+	<-timerCh
 
 	for {
 		select {
@@ -40,8 +44,8 @@ func sendAuditLog(chClient1 <-chan string, chClient2 <-chan string) {
 			sendToServer(msg)
 		case msg := <-chClient2:
 			sendToServer(msg)
-		default:
-			fmt.Println("hey, there's nothing here")
+		case <-timerCh:
+			fmt.Println("timeout")
 		}
 
 	}
