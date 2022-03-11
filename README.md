@@ -87,8 +87,8 @@ Bom, quando se trata de concorrência quase tudo é resolvido usando semáforos.
 2. Esse valor pode ser alterado através de duas operações:
    - signal (incremento)
    - wait (decremento);
-3. Quando uma thread executa a operação wait de um semáforo e o valor ficar negativo, a thread bloqueia;
-4. Quando uma thread executa a operação signal e o valor não for mais negativo, se houverem threads bloqueadas, uma delas é desbloqueada.
+3. Quando uma thread executa a operação wait, o valor é decrementado em um, e se o valor ficar negativo, a thread bloqueia;
+4. Quando uma thread executa a operação signal, o valor é acrescido em um, se houverem threads bloqueadas, uma delas é desbloqueada.
 
 Bem... É isso por enquanto ☾ ⋆⁺₊⋆
 
